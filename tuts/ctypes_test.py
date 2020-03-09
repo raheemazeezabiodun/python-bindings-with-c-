@@ -21,6 +21,6 @@ if __name__ == "__main__":
     print()
 
     # You need tell ctypes that the function returns a float
-    c_lib.cmult.restype = ctypes.c_float
-    answer = c_lib.cmult(x, ctypes.c_float(y))
-    print(f"    In Python: int: {x} float {y:.1f} return val {answer:.1f}")
+    # c_lib.cmult.restype = ctypes.c_float
+    # answer = c_lib.cmult(x, ctypes.c_float(y))
+    # print(f"    In Python: int: {x} float {y:.1f} return val {answer:.1f}")

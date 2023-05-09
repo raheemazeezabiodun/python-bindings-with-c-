@@ -1,16 +1,15 @@
 
-from ctypes import *
 
-def divide_numbers(a, b, library_path="libdivision.so"):
-    libdivision = cdll.LoadLibrary(library_path)
+import ctypes
 
-    libdivision.divide_integers.argtypes = [c_int, c_int]
-    libdivision.divide_integers.restype = c_float
+def float_division(dividend, divisor):
+    libc = ctypes.CDLL("libc.so.6")
+    libc.divf.argtypes = (ctypes.c_float, ctypes.c_float)
+    libc.divf.restype = ctypes.c_float
 
-    libdivision.divide_floats.argtypes = [c_float, c_float]
-    libdivision.divide_floats.restype = c_float
+    if divisor == 0:
+        raise ZeroDivisionError("division by zero")
 
-    return {
-        "integer_division": libdivision.divide_integers(a, b),
-        "float_division": libdivision.divide_floats(c_float(a), c_float(b)),
-    }
+    result = libc.divf(ctypes.c_float(dividend), ctypes.c_float(divisor))
+    return result
+
